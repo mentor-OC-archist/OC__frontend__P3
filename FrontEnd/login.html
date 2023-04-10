@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Sophie Bluel - page de login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<meta name="description" content="">
+	<link rel="stylesheet" href="./assets/style.css">
+    <style>
+        main{
+            margin:200px auto;
+            width:380px;
+        }
+        main>h2{
+            text-align: center;
+        }
+        form{
+            margin: 3rem;
+            display: flex;
+            flex-flow: wrap;
+            justify-content: center;
+        }
+        form>fieldset{
+            display: flex;
+            flex-flow: wrap;
+            gap: .75em;
+            margin-bottom: 2em;
+            width: 100%;
+        }
+        form>fieldset>*{
+            width: 100%;
+        }
+        form>fieldset>input{
+            border:none;
+            padding: 0.75em;
+            box-shadow: 0 0 5px 0.1px silver;
+        }
+        form>button{
+            display: block;
+            background: #1D6154;
+            color:white;
+            border-radius: 25px;
+            margin-bottom: 1em;
+            padding: 5px 2em;
+        }
+        form>a{
+            color:black;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+        <nav>
+            <ul>
+                <li>projets</li>
+                <li>contact</li>
+                <li>login</li>
+                <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Log In</h2>
+        <form>
+            <fieldset>
+                <label for="email">E-mail</label>
+                <input id="email" type="email" />
+            </fieldset>
+            <fieldset>
+                <label for="mdp">Mot de passe</label>
+                <input id="mdp" type="password" />
+            </fieldset>
+            <button>Se connecter</button>
+            <a href="#">Mot de passe oublié ?</a>
+        </form>
+    </main>
+
+    <footer>
+        <nav>
+            <ul>
+                <li>Mentions Légales</li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script>
+        /****BLOCK MENU*/
+        const menuLis = document.querySelectorAll('header>nav>ul>li')
+        , menuUrls = ["/", "contact.html", "login.html"]
+
+        menuLis.forEach((elt,i) => {
+            const txt = elt.innerHTML
+            , a = document.createElement('a')
+
+            a.textContent = elt.textContent
+            a.href = menuUrls[i]
+            elt.textContent = ""
+            elt.append(a)
+        })
+    </script>
+
+    
+</body>
+</html>
