@@ -105,5 +105,28 @@
 		</ul>
 	</nav>
 </footer>
+<script defer async>
+	const gallery = document.querySelector('.gallery')
+
+	fetch("http://localhost:5678/api/works")
+		.then(r=>r.json())
+		.then(arr=>{
+			gallery.textContent = ""
+
+			arr.forEach(json=>{
+				const figure = document.createElement('figure')
+				, img = document.createElement('img')
+				, figcaption = document.createElement('figcaption')
+
+				img.src = json.imageUrl
+				img.alt = json.title
+				figcaption.textContent = json.title
+				
+				figure.append(img)
+				figure.append(figcaption)
+				gallery.append(figure)
+			})
+		})
+</script>
 </body>
 </html>
