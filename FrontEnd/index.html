@@ -9,6 +9,11 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<style>
+		.off{
+			display:none;
+		}
+	</style>
 </head>
 <body>
 <header>
@@ -108,24 +113,63 @@
 <script defer async>
 	const gallery = document.querySelector('.gallery')
 
-	fetch("http://localhost:5678/api/works")
-		.then(r=>r.json())
-		.then(arr=>{
-			gallery.textContent = ""
+	Promise.all([
+		fetch("http://localhost:5678/api/works")
+		, fetch("http://localhost:5678/api/categories")
+	])
+		.then(resp=>{
+			let categories 
+			
+			resp[1].json().then(categories=>{
 
-			arr.forEach(json=>{
-				const figure = document.createElement('figure')
-				, img = document.createElement('img')
-				, figcaption = document.createElement('figcaption')
+				resp[0].json().then(arr=>{
+					/****AJOUT DES WORKS*/
+					console.log(arr);
+					gallery.textContent = ""
 
-				img.src = json.imageUrl
-				img.alt = json.title
-				figcaption.textContent = json.title
-				
-				figure.append(img)
-				figure.append(figcaption)
-				gallery.append(figure)
+					arr.forEach(json=>{
+						const figure = document.createElement('figure')
+						, img = document.createElement('img')
+						, figcaption = document.createElement('figcaption')
+
+						img.src = json.imageUrl
+						img.alt = json.title
+						figcaption.textContent = json.title
+						
+						figure.append(img)
+						figure.append(figcaption)
+						figure.className = json.category.name
+						gallery.append(figure)
+					})
+					const works = gallery.querySelectorAll('figure')
+
+					/****CRÉER LE FILTRE*/
+					const select = document.createElement("select")
+					, createOpt = (id="", name="Tous") => {
+						const opt = document.createElement('option')
+						opt.value = id
+						opt.textContent = name
+						select.append(opt)
+					}
+					createOpt()
+					categories.forEach(elt=>{
+						createOpt(elt.id,elt.name)
+					})
+
+					select.addEventListener("change", e => {
+						const filteredCategory = categories[e.target.selectedIndex - 1]?.name || "Tous"
+						works.forEach(elt => {
+							elt.classList.remove("off")
+							if(elt.className != filteredCategory)
+								elt.classList.add("off")
+						})
+					})
+					gallery.before(select)
+				})
 			})
+
+
+			
 		})
 </script>
 </body>
