@@ -68,11 +68,11 @@
         <form>
             <fieldset>
                 <label for="email">E-mail</label>
-                <input id="email" type="email" />
+                <input id="email" type="email" name="email"/>
             </fieldset>
             <fieldset>
                 <label for="mdp">Mot de passe</label>
-                <input id="mdp" type="password" />
+                <input id="password" type="password" name="password" />
             </fieldset>
             <button>Se connecter</button>
             <a href="#">Mot de passe oublié ?</a>
@@ -100,6 +100,31 @@
             a.href = menuUrls[i]
             elt.textContent = ""
             elt.append(a)
+        })
+
+
+        /****AUTHENTIFICATION DE L’UTILISATEUR*/
+        document.querySelector('form').addEventListener('submit', function(e){
+            e.preventDefault()
+            // alert('ok')
+            // console.log("ok");
+            body={}
+            Array.from(new FormData(document.forms[0]).entries()).forEach(elt => {
+                body[elt[0]] = elt[1]
+            })
+
+            fetch("http://localhost:5678/api/users/login/", {
+                method: "POST"
+                , headers: {"Content-Type": "application/json",}
+                , body: JSON.stringify(body)
+            })
+                .then(r=>{
+                    console.log(r);
+                    location.href="index.html"
+                })
+                .catch(e=>{
+                    alert("Erreur dans la pair: username/password\Veuillez recommencer")
+                })
         })
     </script>
 
