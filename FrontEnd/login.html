@@ -103,7 +103,7 @@
         })
 
 
-        /****AUTHENTIFICATION DE L’UTILISATEUR*/
+/****STEP2.2 AUTHENTIFICATION DE L’UTILISATEUR*/
         document.querySelector('form').addEventListener('submit', function(e){
             e.preventDefault()
             // alert('ok')
@@ -118,14 +118,25 @@
                 , headers: {"Content-Type": "application/json",}
                 , body: JSON.stringify(body)
             })
-                .then(r=>{
-                    console.log(r);
-                    location.href="index.html"
+                .then(r=>r.json())
+                .then(({userId, token})=>{
+                    // console.log(r);
+                    // console.log(r.userId);
+                    // console.log(r.token);
+                    if(token){
+                        const sophie = {userId, token}
+                        localStorage.sophie = JSON.stringify(sophie)
+                        location.href="index.html"
+                    }
+                    else 
+                        alert("Erreur dans la pair: username/password\Veuillez recommencer")
                 })
-                .catch(e=>{
-                    alert("Erreur dans la pair: username/password\Veuillez recommencer")
-                })
+                // .catch(e=>{
+                //     alert("Erreur dans la pair: username/password\Veuillez recommencer")
+                // })
         })
+/****STEP2.2 END*/
+
     </script>
 
     

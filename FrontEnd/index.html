@@ -9,11 +9,69 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+
+	<script src="https://kit.fontawesome.com/af00583391.js" crossorigin="anonymous"></script>
 	<style>
 		.off{
 			display:none;
 		}
 		header ul a{color:inherit;text-decoration: none;}
+		
+		body>div.modify{
+			box-sizing: border-box;
+			position: absolute;
+			top:0;
+			left:0;
+			width: 100%;
+			height: 50px;
+			background-color: black;
+			padding: 1em;
+			display: flex;
+			justify-content: center;
+    		gap: 20px;
+		}
+		body>div.modify>a{
+			color:white;
+			display: flex;
+    		gap: 20px;
+		}
+		:not(header) a[href="#mode_edit"]{
+			color:black;
+			display: flex !important;
+			gap: 5px;
+			text-decoration: none;
+			font-size: 1em;
+		}
+
+		#modal{
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: rgba(0,0,0,.5);
+			display: flex;
+			justify-content: center;
+		}
+		#modal>.content{
+			display: flex;
+    		flex-flow: column;
+			width: calc(50% + 50px);
+			background:white;
+			padding: 50px;
+		}
+		#modal>.content ul{
+			display: flex;
+			flex-flow: wrap;
+			gap: 10px;
+		}
+		#modal>.content ul li{
+			width: calc(20% - 10px);
+		}
+		#modal>.content img{
+			width: 100%;
+		}
+
 	</style>
 </head>
 <body>
@@ -111,6 +169,74 @@
 			</ul>
 		</nav>
 	</footer>
+
+	<div id="modal">
+		<div class="content">
+			<!--h2>Galerie photo</h2>
+			<ul>
+				<li><img src="http://localhost:5678/images/abajour-tahina1651286843956.png" alt="">
+					<a href="">éditer</a>
+					<i class="fa-solid fa-up-down-left-right"></i><i class="fa-sharp fa-light fa-trash-can"></i>
+				</li>
+				<li><img src="http://localhost:5678/images/abajour-tahina1651286843956.png" alt="">
+					<a href="">éditer</a>
+					<i class="fa-solid fa-up-down-left-right"></i><i class="fa-sharp fa-light fa-trash-can"></i>
+				</li>
+				<li><img src="http://localhost:5678/images/abajour-tahina1651286843956.png" alt="">
+					<a href="">éditer</a>
+					<i class="fa-solid fa-up-down-left-right"></i><i class="fa-sharp fa-light fa-trash-can"></i>
+				</li>
+				<li><img src="http://localhost:5678/images/abajour-tahina1651286843956.png" alt="">
+					<a href="">éditer</a>
+					<i class="fa-solid fa-up-down-left-right"></i><i class="fa-sharp fa-light fa-trash-can"></i>
+				</li>
+				<li><img src="http://localhost:5678/images/abajour-tahina1651286843956.png" alt="">
+					<a href="">éditer</a>
+					<i class="fa-solid fa-up-down-left-right"></i><i class="fa-sharp fa-light fa-trash-can"></i>
+				</li>
+				<li><img src="http://localhost:5678/images/abajour-tahina1651286843956.png" alt="">
+					<a href="">éditer</a>
+					<i class="fa-solid fa-up-down-left-right"></i><i class="fa-sharp fa-light fa-trash-can"></i>
+				</li>
+				<li><img src="http://localhost:5678/images/abajour-tahina1651286843956.png" alt="">
+					<a href="">éditer</a>
+					<i class="fa-solid fa-up-down-left-right"></i><i class="fa-sharp fa-light fa-trash-can"></i>
+				</li>
+				<li><img src="http://localhost:5678/images/abajour-tahina1651286843956.png" alt="">
+					<a href="">éditer</a>
+					<i class="fa-solid fa-up-down-left-right"></i><i class="fa-sharp fa-light fa-trash-can"></i>
+				</li>
+				<li><img src="http://localhost:5678/images/abajour-tahina1651286843956.png" alt="">
+					<a href="">éditer</a>
+					<i class="fa-solid fa-up-down-left-right"></i><i class="fa-sharp fa-light fa-trash-can"></i>
+				</li>
+				<li><img src="http://localhost:5678/images/abajour-tahina1651286843956.png" alt="">
+					<a href="">éditer</a>
+					<i class="fa-solid fa-up-down-left-right"></i><i class="fa-sharp fa-light fa-trash-can"></i>
+				</li>
+				<li><img src="http://localhost:5678/images/abajour-tahina1651286843956.png" alt="">
+					<a href="">éditer</a>
+					<i class="fa-solid fa-up-down-left-right"></i><i class="fa-sharp fa-light fa-trash-can"></i>
+				</li>
+			</ul-->
+			
+			<!-- i.fa-solid.fa-arrow-left+h2{Ajout photo}+form>(fieldset>i.fa-solid.fa-arrow-up-right+input[type="file"]+button{+ Ajouter photo}+span{jpg, png : 4mo max})+(fieldset>label{Titre}+input)*2 -->
+			<i class="fa-solid fa-arrow-left"></i>
+			<h2>Ajout photo</h2>
+			<form action="">
+				<fieldset>
+					<i class="fa-solid fa-arrow-up-right"></i>
+					<input type="file">
+					<button>+ Ajouter photo</button>
+					<span>jpg, png : 4mo max</span>
+				</fieldset>
+				<fieldset><label for="">Titre</label><input type="text"></fieldset>
+				<fieldset><label for="">Titre</label><input type="text"></fieldset>
+				<hr>
+				<input value="Valider" type="submit">
+			</form>
+		</div>
+	</div>
 	<script defer async>
 		const gallery = document.querySelector('.gallery')
 
@@ -133,7 +259,6 @@
 							opt.textContent = name
 							select.append(opt)
 						}
-
 
 
 						/****AJOUT DES WORKS*/
@@ -181,14 +306,69 @@
 
 		/****BLOCK MENU*/
 		const menuLis = document.querySelectorAll('header>nav>ul>li')
-		, menuUrls = ["/", "contact.html", "login.html"]
+		, menuUrls = ["", "contact.html", "login.html", "instagram.com"]
+		// , do_uri_have_FrontEnd = location.href.indexOf("FrontEnd")==-1 ? "" : "FrontEnd/"
 
 		menuLis.forEach((elt,i) => {
 			const txt = elt.innerHTML
 			, a = document.createElement('a')
 
-			a.textContent = elt.textContent
+			// console.log(elt.textContent);
+			// console.log(elt);
+
 			a.href = menuUrls[i]
+			switch(i){
+				case 2:	
+					// a.textContent = "login"
+/****STEP2.2 AUTHENTIFICATION DE L’UTILISATEUR*/
+					if(!localStorage.sophie)
+						a.textContent = "login"
+					else{
+						a.textContent = "logout"
+						a.href = "#logout"
+						a.addEventListener('click', e=>{
+							localStorage.removeItem('sophie')
+							location.href = ""
+						})
+
+						const div = document.createElement('div')
+						, mode_edit = document.createElement('a')
+						, mode_img = document.createElement('a')
+						, mode_menu = document.createElement('a')
+						, icon = document.createElement('i')
+						, icon_img = document.createElement('i')
+						, icon_menu = document.createElement('i')
+						, publish_btn = document.createElement('button')
+
+						icon.className = icon_img.className = icon_menu.className = "fa-solid fa-pen-to-square"
+						mode_edit.href = mode_img.href = mode_menu.href = "#mode_edit"
+						mode_edit.textContent = "Mode édition"
+						mode_img.textContent = mode_menu.textContent = "Modifier"
+						publish_btn.textContent = "publier les changements"
+						div.className = "modify"
+
+						mode_edit.prepend(icon)
+						mode_img.prepend(icon_img)
+						mode_menu.prepend(icon_menu)
+						div.append(mode_edit)
+						div.append(publish_btn)
+						document.body.prepend(div)
+						document.body.style.paddingTop = "50px";
+						document.querySelector('#introduction figure').append(mode_img)
+						document.querySelector('#portfolio>h2').append(mode_menu)
+					}
+				break;
+/****STEP2.2 END*/
+				case 3: 
+					const img = document.createElement('img')
+					// img.src= do_uri_have_FrontEnd+"assets/icons/instagram.png"
+					img.src= "assets/icons/instagram.png"
+					a.append(img)
+					a.target = "_blank"
+				break;
+				default: a.textContent = elt.textContent
+				break;
+			}
 			elt.textContent = ""
 			elt.append(a)
 		})

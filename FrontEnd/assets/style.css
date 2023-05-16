@@ -105,7 +105,10 @@ li:hover {
 #introduction figure {
 	flex: 1
 }
-#introduction img {
+#introduction > figure > img {
+	margin-bottom: .5em;
+}
+#introduction > figure > * {
 	display: block;
 	margin: auto;
 	width: 80%;
@@ -124,6 +127,10 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	align-items: center;
 }
 .gallery {
 	width: 100%;
